@@ -1,62 +1,70 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace JungleFrog.Physics
 {
     public class PhysicsManager : MonoBehaviour
     {
-        [Header("Setup")]
-        [SerializeField]
-        PhysicsObject physicsObject;
+        static PhysicsManager Singleton;
 
         [Header("Setup.Boundaries")]
         [SerializeField]
         Transform min;
         [SerializeField]
         Transform max;
+        [SerializeField]
+        Transform center;
 
-        Vector3 lastMousePosition;
-        Vector3 direction;
+        [Header("GD")]
+        [SerializeField]
+        float maxDistance = 10;
 
-        public Transform Min { get => min; }
-        public Transform Max { get => max; }
+        public static Transform Min { get => Singleton.min; }
 
-        private void Update()
+        public static Transform Max { get => Singleton.max; }
+
+
+        private void Awake()
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                lastMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-                direction = (lastMousePosition
-                    - physicsObject.transform.position).normalized;
-
-                physicsObject.Move(direction);
-            }
+            Singleton = this;
         }
+
+        internal static bool GetOutOfScreen(Vector3 position)
+        {
+            return Vector3.Distance(Singleton.center.position,
+                position) > Singleton.maxDistance;
+        }
+
 
 #if UNITY_EDITOR
 
         private void OnDrawGizmos()
         {
-            Gizmos.DrawWireSphere(lastMousePosition, 0.3f);
+            if (center != null)
+            {
+                Gizmos.color = Color.green;
+                Gizmos.DrawWireSphere(center.position, 0.3f);
+                Gizmos.DrawWireSphere(center.position, maxDistance);
+            }
 
-            if (Min == null || Max == null) return;
+            if (min == null || max == null) return;
 
             Gizmos.color = Color.white;
-            Gizmos.DrawWireSphere(Min.position, 0.3f);
-            Gizmos.DrawWireSphere(Max.position, 0.3f);
+            Gizmos.DrawWireSphere(min.position, 0.3f);
+            Gizmos.DrawWireSphere(max.position, 0.3f);
 
             Vector3 start = new Vector3();
             Vector3 end = new Vector3();
 
-            Vector3 min = Min.transform.position;
-            Vector3 max = Max.transform.position;
+            Vector3 vMin = this.min.transform.position;
+            Vector3 vMax = this.max.transform.position;
 
             Gizmos.color = Color.red;
-            DrawLine(min.x, min.y, max.x, min.y);
-            DrawLine(max.x, min.y, max.x, max.y);
-            DrawLine(max.x, max.y, min.x, max.y);
-            DrawLine(min.x, max.y, min.x, min.y);
+            DrawLine(vMin.x, vMin.y, vMax.x, vMin.y);
+            DrawLine(vMax.x, vMin.y, vMax.x, vMax.y);
+            DrawLine(vMax.x, vMax.y, vMin.x, vMax.y);
+            DrawLine(vMin.x, vMax.y, vMin.x, vMin.y);
 
 
             void DrawLine(float minX, float minY, float maxX, float maxY)

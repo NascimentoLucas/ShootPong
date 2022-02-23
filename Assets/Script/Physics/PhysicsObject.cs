@@ -7,11 +7,6 @@ namespace JungleFrog.Physics
 {
     public abstract class PhysicsObject : MonoBehaviour
     {
-
-        [Header("Setup")]
-        [SerializeField]
-        PhysicsManager manager;
-
         [Header("GD")]
         [SerializeField]
         float speed = 0.1f;
@@ -21,7 +16,7 @@ namespace JungleFrog.Physics
         [SerializeField]
         Vector3 direction;
 
-        private void FixedUpdate()
+        protected virtual void FixedUpdate()
         {
             transform.position += direction;
             CheckBoundaries();
@@ -29,34 +24,31 @@ namespace JungleFrog.Physics
 
         private void CheckBoundaries()
         {
-            Vector3 pos = transform.position;
 
-            if (transform.position.x < manager.Min.position.x)
+            if (transform.position.x < PhysicsManager.Min.position.x)
             {
-                pos.x = manager.Min.position.x;
-                direction = Vector3.zero;
+                SetXPos(PhysicsManager.Min.position.x);
             }
-            else if (transform.position.x > manager.Max.position.x)
+            else if (transform.position.x > PhysicsManager.Max.position.x)
             {
-                pos.x = manager.Max.position.x;
-                direction = Vector3.zero;
+                SetXPos(PhysicsManager.Max.position.x);
             }
 
-            if (transform.position.y < manager.Min.position.y)
+            void SetXPos(float x)
             {
-                pos.y = manager.Min.position.y;
-                direction = Vector3.zero;
+                Vector3 pos = transform.position;
+                pos.x = x;
+                direction.x *= -1;
+                transform.position = pos;
             }
-            else if (transform.position.y > manager.Max.position.y)
-            {
-                pos.y = manager.Max.position.y;
-                direction = Vector3.zero;
-            }
-
-            transform.position = pos;
         }
 
-        internal void Move(Vector3 dir)
+        internal virtual void Stop()
+        {
+            direction = Vector3.zero;
+        }
+
+        internal virtual void Move(Vector3 dir)
         {
             dir.z = 0;
             dir *= speed;
