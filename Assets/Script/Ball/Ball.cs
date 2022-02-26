@@ -12,6 +12,8 @@ namespace JungleFrog.Ball
         [Range(0.0001f, 0.999f)]
         float gravity = 0.1f;
 
+
+
         protected override void FixedUpdate()
         {
             base.FixedUpdate();
@@ -23,7 +25,8 @@ namespace JungleFrog.Ball
             Missile.Missile missile = collision.GetComponent<Missile.Missile>();
             if (missile != null)
             {
-                Debug.Log("OI");
+                Vector2 dir = transform.position - missile.transform.position;
+                Move(dir.normalized);
             }
         }
     }
