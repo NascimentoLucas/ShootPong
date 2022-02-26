@@ -9,6 +9,12 @@ namespace JungleFrog.Missile
 {
     public class Missile : PhysicsObject
     {
+
+        [Header("Setup")]
+        [SerializeField]
+        SpriteRenderer spriteRenderer;
+        [SerializeField]
+        Cannon.Cannon cannon;
         Ball.Ball ball;
 
         [Header("GD")]
@@ -31,6 +37,7 @@ namespace JungleFrog.Missile
             set
             {
                 isMoving = value;
+                cannon.MissleCanShoot(!value);
                 gameObject.SetActive(value);
             }
         }
@@ -45,11 +52,20 @@ namespace JungleFrog.Missile
         {
             base.FixedUpdate();
 
-            if (Environment.Field.GetOutOfScreen(transform.position)
+            if (Field.GetOutOfScreen(transform.position)
                 || time < Time.timeSinceLevelLoad)
             {
                 Stop();
             }
+
+            RotateSprite();
+        }
+
+        private void RotateSprite()
+        {
+            //https://answers.unity.com/questions/585035/lookat-2d-equivalent-.html
+            float rot_z = Mathf.Atan2(Direction.y, Direction.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
         }
 
         internal override void Stop()

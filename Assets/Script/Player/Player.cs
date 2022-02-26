@@ -29,10 +29,10 @@ namespace JungleFrog.Player
 
         internal void GoalTaken()
         {
-            Debug.Log("Goal");
+            Debug.Log($" {name} taken Goal");
         }
 
-        public void PlayerShoot()
+        public void Shoot()
         {
             cannon.Shoot();
         }

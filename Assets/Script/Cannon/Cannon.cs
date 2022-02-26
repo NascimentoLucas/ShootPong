@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using JungleFrog.Missile;
+using System;
 
 namespace JungleFrog.Cannon
 {
@@ -8,9 +9,17 @@ namespace JungleFrog.Cannon
     {
         [Header("Setup")]
         [SerializeField]
+        SpriteRenderer spriteRenderer;
+        [SerializeField]
         Transform edge;
         [SerializeField]
         Missile.Missile missile;
+
+        [Header("GD")]
+        [SerializeField]
+        Color readyToShootColor = Color.green;
+        [SerializeField]
+        Color waitingToShootColor = Color.red;
 
         private void Awake()
         {
@@ -23,7 +32,7 @@ namespace JungleFrog.Cannon
             {
                 missile.transform.position = edge.position;
                 Vector3 dir = edge.position - transform.position;
-                missile.Move(dir.normalized); 
+                missile.Move(dir.normalized);
             }
         }
 
@@ -42,5 +51,13 @@ namespace JungleFrog.Cannon
                 transform.position + dir);
         }
 #endif
+
+        internal void MissleCanShoot(bool value)
+        {
+            if (value)
+                spriteRenderer.color = readyToShootColor;
+            else
+                spriteRenderer.color = waitingToShootColor;
+        }
     }
 }

@@ -27,6 +27,7 @@ namespace JungleFrog.Ball
             {
                 Vector2 dir = transform.position - missile.transform.position;
                 Move(dir.normalized);
+                missile.Stop();
             }
         }
     }

@@ -20,7 +20,7 @@ namespace Assets.Script
         {
             if (Input.GetMouseButtonDown(0))
             {
-                players[currentPlayer].PlayerShoot();
+                players[currentPlayer].Shoot();
 
                 currentPlayer++;
                 if (currentPlayer > players.Length - 1)
