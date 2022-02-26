@@ -1,26 +1,23 @@
 ﻿using System.Collections;
 using UnityEngine;
+using JungleFrog.Cannon;
 
-namespace JungleFrog.Cannon
+namespace JungleFrog.Player
 {
     public class Player : MonoBehaviour
     {
         [Header("Setup")]
         [SerializeField]
-        Cannon cannon;
+        Cannon.Cannon cannon;
 
         [Header("GD")]
         [SerializeField]
         float rotation;
+              
 
-
-
-        private void Update()
+        public void PlayerShoot()
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                cannon.Shoot();
-            }
+            cannon.Shoot();
         }
 
         private void FixedUpdate()

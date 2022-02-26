@@ -8,9 +8,7 @@ namespace JungleFrog.Missile
 {
     public class Missile : PhysicsObject
     {
-        [Header("Missile.Setup")]
-        [SerializeField]
-        Renderer myRenderer;
+        Ball.Ball ball;
 
         [Header("GD")]
         [SerializeField]
@@ -21,7 +19,10 @@ namespace JungleFrog.Missile
         [SerializeField]
         bool isMoving;
 
-
+        private void Start()
+        {
+            ball = FindObjectOfType<Ball.Ball>();
+        }
 
         public bool IsMoving
         {
@@ -29,7 +30,7 @@ namespace JungleFrog.Missile
             set
             {
                 isMoving = value;
-                myRenderer.enabled = value;
+                gameObject.SetActive(value);
             }
         }
 

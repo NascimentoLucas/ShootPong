@@ -16,6 +16,8 @@ namespace JungleFrog.Physics
         [SerializeField]
         Vector3 direction;
 
+        protected Vector3 Direction { get => direction; set => direction = value; }
+
         protected virtual void FixedUpdate()
         {
             transform.position += direction;
