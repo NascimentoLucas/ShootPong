@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using JungleFrog.Environment;
 
 namespace JungleFrog.Physics
 {
@@ -27,13 +28,13 @@ namespace JungleFrog.Physics
         private void CheckBoundaries()
         {
 
-            if (transform.position.x < PhysicsManager.Min.position.x)
+            if (transform.position.x < Field.Min.position.x)
             {
-                SetXPos(PhysicsManager.Min.position.x);
+                SetXPos(Field.Min.position.x);
             }
-            else if (transform.position.x > PhysicsManager.Max.position.x)
+            else if (transform.position.x > Field.Max.position.x)
             {
-                SetXPos(PhysicsManager.Max.position.x);
+                SetXPos(Field.Max.position.x);
             }
 
             void SetXPos(float x)

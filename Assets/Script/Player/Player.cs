@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 using JungleFrog.Cannon;
+using JungleFrog.Environment;
+using System;
 
 namespace JungleFrog.Player
 {
@@ -8,12 +10,27 @@ namespace JungleFrog.Player
     {
         [Header("Setup")]
         [SerializeField]
+        SpriteRenderer spriteRender;
+        [SerializeField]
         Cannon.Cannon cannon;
+        [SerializeField]
+        GoalLine goalLine;
 
         [Header("GD")]
         [SerializeField]
+        string playerName = "Player";
+        [SerializeField]
         float rotation;
-              
+
+        private void Start()
+        {
+            goalLine.SetText(playerName);
+        }
+
+        internal void GoalTaken()
+        {
+            Debug.Log("Goal");
+        }
 
         public void PlayerShoot()
         {
@@ -22,7 +39,7 @@ namespace JungleFrog.Player
 
         private void FixedUpdate()
         {
-            transform.Rotate(0, 0, rotation);
+            spriteRender.transform.Rotate(0, 0, rotation);
         }
     }
 }

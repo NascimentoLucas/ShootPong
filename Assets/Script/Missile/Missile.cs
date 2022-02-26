@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using JungleFrog.Physics;
+using JungleFrog.Environment;
 using System;
 
 namespace JungleFrog.Missile
@@ -44,7 +45,7 @@ namespace JungleFrog.Missile
         {
             base.FixedUpdate();
 
-            if (PhysicsManager.GetOutOfScreen(transform.position)
+            if (Environment.Field.GetOutOfScreen(transform.position)
                 || time < Time.timeSinceLevelLoad)
             {
                 Stop();

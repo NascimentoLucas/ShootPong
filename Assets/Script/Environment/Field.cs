@@ -2,11 +2,11 @@
 using System.Collections;
 using UnityEngine;
 
-namespace JungleFrog.Physics
+namespace JungleFrog.Environment
 {
-    public class PhysicsManager : MonoBehaviour
+    public class Field : MonoBehaviour
     {
-        static PhysicsManager Singleton;
+        static Field Singleton;
 
         [Header("Setup.Boundaries")]
         [SerializeField]
