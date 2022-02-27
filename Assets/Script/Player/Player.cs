@@ -1,20 +1,29 @@
-﻿using System.Collections;
+﻿using System;
 using UnityEngine;
-using JungleFrog.Cannon;
+using JungleFrog;
 using JungleFrog.Environment;
-using System;
 
 namespace JungleFrog.Player
 {
     public class Player : MonoBehaviour
     {
+        const string FireTrigger = "Fire";
+
         [Header("Setup")]
+        [SerializeField]
+        Game game;
         [SerializeField]
         SpriteRenderer spriteRender;
         [SerializeField]
         Cannon.Cannon cannon;
         [SerializeField]
         GoalLine goalLine;
+        [SerializeField]
+        Animator animator;
+
+        [Header("GD.Position")]
+        [SerializeField]
+        PlayerFieldPosition fieldPosition;
 
         [Header("GD")]
         [SerializeField]
@@ -29,12 +38,15 @@ namespace JungleFrog.Player
 
         internal void GoalTaken()
         {
-            Debug.Log($" {name} taken Goal");
+            game.AddScore(fieldPosition);
         }
 
         public void Shoot()
         {
-            cannon.Shoot();
+            if (cannon.Shoot())
+            {
+                animator.SetTrigger(FireTrigger);
+            }
         }
 
         private void FixedUpdate()

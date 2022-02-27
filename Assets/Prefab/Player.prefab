@@ -151,6 +151,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3642928766827506451}
   - component: {fileID: 8751145270019622195}
+  - component: {fileID: 4972325646753010037}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -187,11 +188,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90402c2b6fa194645acef69a4014391a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  game: {fileID: 0}
   spriteRender: {fileID: 325318823575342264}
   cannon: {fileID: 3642928767389913460}
   goalLine: {fileID: 4618637940047843890}
+  animator: {fileID: 4972325646753010037}
+  fieldPosition: 0
   playerName: Player
   rotation: 1
+--- !u!95 &4972325646753010037
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3642928766827506448}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 06c91a4d7638e5b40b55896d7cb42f84, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1434195319863029744
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -280,6 +303,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3642928766827506451}
     m_Modifications:
+    - target: {fileID: 2476410038929654362, guid: 4534fcde5fa8cea47a1972aaabf86615, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 4003290035772880210, guid: 4534fcde5fa8cea47a1972aaabf86615, type: 3}
       propertyPath: m_RootOrder
       value: 1

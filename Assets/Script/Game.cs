@@ -1,31 +1,49 @@
 ﻿using System.Collections;
 using UnityEngine;
 using JungleFrog.Player;
+using TMPro;
 
-namespace Assets.Script
+namespace JungleFrog
 {
+    public enum PlayerFieldPosition
+    {
+        TOP,
+        BOTTOM,
+    }
+
     public class Game : MonoBehaviour
     {
-        Player[] players;
+        [Header("Setup")]
+        [SerializeField]
+        TextMeshProUGUI scoreText;
 
+        int playerTopScore;
+        int playerBottomScore;
 
-        int currentPlayer;
 
         private void Awake()
         {
-            players = FindObjectsOfType<Player>();
+            playerTopScore = playerTopScore = 0;
+            UpdateText();
         }
 
-        void Update()
+        void UpdateText()
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                players[currentPlayer].Shoot();
+            scoreText.text = $"{playerTopScore} - {playerBottomScore}";
+        }
 
-                currentPlayer++;
-                if (currentPlayer > players.Length - 1)
-                    currentPlayer = 0;
+        public void AddScore(PlayerFieldPosition position)
+        {
+            if (position == PlayerFieldPosition.TOP)
+            {
+                playerTopScore++;
             }
+            else
+            {
+                playerBottomScore++;
+            }
+
+            UpdateText();
         }
     }
 }

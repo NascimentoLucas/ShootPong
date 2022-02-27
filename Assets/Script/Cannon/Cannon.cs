@@ -26,14 +26,17 @@ namespace JungleFrog.Cannon
             missile.gameObject.transform.parent = null;
         }
 
-        public void Shoot()
+        public bool Shoot()
         {
             if (!missile.IsMoving)
             {
                 missile.transform.position = edge.position;
                 Vector3 dir = edge.position - transform.position;
                 missile.Move(dir.normalized);
+                return true;
             }
+
+            return false;
         }
 
 

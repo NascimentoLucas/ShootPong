@@ -20,7 +20,13 @@ namespace JungleFrog.Environment
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            player.GoalTaken();
+            Ball.Ball ball = collision.GetComponent<Ball.Ball>();
+
+            if (ball != null)
+            {
+                player.GoalTaken();
+                ball.ResetPosition();
+            }
         }
     }
 }
