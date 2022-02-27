@@ -1,5 +1,6 @@
-﻿using System.Collections;
+﻿using System;
 using UnityEngine;
+using JungleFrog.Audio;
 using TMPro;
 
 namespace JungleFrog.Environment
@@ -26,6 +27,7 @@ namespace JungleFrog.Environment
             {
                 player.GoalTaken();
                 ball.ResetPosition();
+                AudioManager.Play(SoundEffect.Goal);
             }
         }
     }

@@ -1,7 +1,7 @@
-﻿using System.Collections;
+﻿using System;
 using UnityEngine;
 using JungleFrog.Physics;
-using System;
+using JungleFrog.Audio;
 
 namespace JungleFrog.Ball
 {
@@ -41,8 +41,10 @@ namespace JungleFrog.Ball
                 Vector2 dir = transform.position - missile.transform.position;
                 Move(dir.normalized);
                 missile.Stop();
+                
                 animator.SetTrigger(TouchedTrigger);
                 particleSystem.Play();
+                AudioManager.Play(SoundEffect.BallTouched);
             }
         }
 
