@@ -15,7 +15,9 @@ namespace JungleFrog
     {
         [Header("Setup")]
         [SerializeField]
-        TextMeshProUGUI scoreText;
+        TextMeshProUGUI topScoreText;
+        [SerializeField]
+        TextMeshProUGUI bottomScoreText;
 
 
         [Header("Setup.UI")]
@@ -39,12 +41,13 @@ namespace JungleFrog
 
         void UpdateText()
         {
-            scoreText.text = $"{playerTopScore} - {playerBottomScore}";
+            topScoreText.text = $"{playerTopScore}";
+            bottomScoreText.text = $"{playerBottomScore}";
         }
 
         public void AddScore(PlayerFieldPosition position)
         {
-            if (position == PlayerFieldPosition.TOP)
+            if (position != PlayerFieldPosition.TOP)
             {
                 playerTopScore++;
             }
