@@ -22,27 +22,14 @@ namespace JungleFrog.Physics
         protected virtual void FixedUpdate()
         {
             transform.position += direction;
-            CheckBoundaries();
         }
 
-        private void CheckBoundaries()
+        protected virtual void OnTriggerEnter2D(Collider2D collision)
         {
-
-            if (transform.position.x < Field.Min.position.x)
+            FieldBarrier fieldBarrier = collision.GetComponent<FieldBarrier>();
+            if (fieldBarrier != null)
             {
-                SetXPos(Field.Min.position.x);
-            }
-            else if (transform.position.x > Field.Max.position.x)
-            {
-                SetXPos(Field.Max.position.x);
-            }
-
-            void SetXPos(float x)
-            {
-                Vector3 pos = transform.position;
-                pos.x = x;
                 direction.x *= -1;
-                transform.position = pos;
             }
         }
 

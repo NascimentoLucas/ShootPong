@@ -195,7 +195,7 @@ MonoBehaviour:
   animator: {fileID: 4972325646753010037}
   fieldPosition: 0
   playerName: Player
-  rotation: 1
+  rotation: -1.5
 --- !u!95 &4972325646753010037
 Animator:
   serializedVersion: 3

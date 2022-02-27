@@ -33,10 +33,14 @@ namespace JungleFrog
 
         private void Awake()
         {
-            tutorialUI.gameObject.SetActive(true);
-            confirmQuitUI.gameObject.SetActive(false);
             playerTopScore = playerTopScore = 0;
             UpdateText();
+
+#if UNITY_EDITOR
+            return;
+#endif
+            tutorialUI.gameObject.SetActive(true);
+            confirmQuitUI.gameObject.SetActive(false);
         }
 
         void UpdateText()

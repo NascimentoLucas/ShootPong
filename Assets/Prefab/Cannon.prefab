@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2407456999456734850}
   - component: {fileID: 2407456999456734851}
   - component: {fileID: 2407456999456734852}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2407457000493589101}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Edge
   m_TagString: Untagged
   m_Icon: {fileID: 0}

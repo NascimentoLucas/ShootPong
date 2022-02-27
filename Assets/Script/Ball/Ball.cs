@@ -33,7 +33,7 @@ namespace JungleFrog.Ball
             Direction *= gravity;
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        protected override void OnTriggerEnter2D(Collider2D collision)
         {
             Missile.Missile missile = collision.GetComponent<Missile.Missile>();
             if (missile != null)
@@ -41,11 +41,13 @@ namespace JungleFrog.Ball
                 Vector2 dir = transform.position - missile.transform.position;
                 Move(dir.normalized);
                 missile.Stop();
-                
+
                 animator.SetTrigger(TouchedTrigger);
                 particleSystem.Play();
                 AudioManager.Play(SoundEffect.BallTouched);
+                return;
             }
+            base.OnTriggerEnter2D(collision);
         }
 
         internal void ResetPosition()
